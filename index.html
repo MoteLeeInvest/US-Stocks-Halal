@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>US Stocks Trade Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#4D9FFF;--blue2:#7DB8FF;--dark:#0B0D0F;--dark2:#12151A;--dark3:#1A1F27;--border:#2A333F;--red:#E05555;--red2:#FF7070;--green:#3DB87A;--green2:#5FCFA0;--amber:#E89830;--amber2:#F5B84B;--text:#E8ECF0;--text2:#8A9BB0;--text3:#4A5A70;--mono:'Space Mono',monospace;--sans:'Noto Sans Thai',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dark);color:var(--text);font-family:var(--sans);min-height:100vh}
+nav{background:var(--dark2);border-bottom:1px solid var(--border);padding:15px 32px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#1a5fa8,var(--blue2));display:flex;align-items:center;justify-content:center;font-size:18px}
+.logo-text{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--blue2);letter-spacing:2px}
+.logo-sub{font-size:10px;color:var(--text2);margin-top:1px}
+.live-pill{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--green2);background:rgba(61,184,122,0.1);border:1px solid rgba(61,184,122,0.25);padding:5px 12px;border-radius:100px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero{background:linear-gradient(180deg,var(--dark2) 0%,var(--dark) 100%);border-bottom:1px solid var(--border);padding:36px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(77,159,255,0.08),transparent 70%);pointer-events:none}
+.hero-date{font-family:var(--mono);font-size:11px;color:var(--blue2);letter-spacing:3px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:600;color:var(--text);margin-bottom:6px}
+.hero-sub{font-size:13px;color:var(--text2)}
+.blue-divider{height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);margin:14px auto;max-width:300px}
+.main{max-width:960px;margin:0 auto;padding:28px 24px}
+/* TABS */
+.tab-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:6px;display:flex;gap:4px;flex-wrap:wrap;margin-bottom:24px}
+.tab-btn{font-family:var(--mono);font-size:11px;font-weight:700;padding:8px 14px;border-radius:8px;border:none;background:transparent;color:var(--text2);cursor:pointer;letter-spacing:.5px;transition:all .15s;white-space:nowrap}
+.tab-btn:hover{color:var(--text);background:var(--dark3)}
+.tab-btn.on{background:var(--dark3);color:var(--blue2);border:1px solid rgba(77,159,255,0.25)}
+.tab-pane{display:none}.tab-pane.on{display:block}
+/* STOCK PAGE */
+.sp-header{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin-bottom:16px;position:relative;overflow:hidden}
+.sp-header::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(77,159,255,0.08),transparent 70%);pointer-events:none}
+.sp-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.sp-left{}
+.sp-sym{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--blue2);letter-spacing:2px;background:rgba(77,159,255,0.1);border:1px solid rgba(77,159,255,0.25);padding:4px 12px;border-radius:4px;display:inline-block}
+.sp-name{font-size:13px;color:var(--text2);margin-top:5px}
+.sp-right{text-align:right}
+.sp-price{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--text);line-height:1}
+.sp-chg-p{font-size:13px;color:var(--green2);margin-top:4px;font-family:var(--mono)}
+.sp-chg-n{font-size:13px;color:var(--red2);margin-top:4px;font-family:var(--mono)}
+.sp-chg-z{font-size:13px;color:var(--amber2);margin-top:4px;font-family:var(--mono)}
+.blue-line{height:2px;background:linear-gradient(90deg,var(--blue),var(--blue2),transparent);border-radius:1px;margin:12px 0}
+.sp-bias{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.bias-bull{display:inline-flex;align-items:center;gap:5px;background:rgba(61,184,122,0.12);border:1px solid rgba(61,184,122,0.28);border-radius:100px;padding:5px 12px}
+.bias-bear{display:inline-flex;align-items:center;gap:5px;background:rgba(224,85,85,0.12);border:1px solid rgba(224,85,85,0.28);border-radius:100px;padding:5px 12px}
+.bias-wait{display:inline-flex;align-items:center;gap:5px;background:rgba(232,152,48,0.11);border:1px solid rgba(232,152,48,0.26);border-radius:100px;padding:5px 12px}
+.dg{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+.dr{width:5px;height:5px;border-radius:50%;background:var(--red);animation:blink 1.5s infinite}
+.da{width:5px;height:5px;border-radius:50%;background:var(--amber)}
+.bl-g{font-size:11px;font-weight:600;color:var(--green2);letter-spacing:.4px}
+.bl-r{font-size:11px;font-weight:600;color:var(--red2);letter-spacing:.4px}
+.bl-a{font-size:11px;font-weight:600;color:var(--amber2);letter-spacing:.4px}
+.badge{font-size:10px;color:var(--text2);background:var(--dark3);border:1px solid var(--border);padding:3px 10px;border-radius:100px}
+/* TRADE GRID */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.tc{border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.tc-hs{padding:10px 16px;background:linear-gradient(90deg,rgba(224,85,85,0.18),rgba(224,85,85,0.04));border-bottom:1px solid rgba(224,85,85,0.2)}
+.tc-hb{padding:10px 16px;background:linear-gradient(90deg,rgba(61,184,122,0.15),rgba(61,184,122,0.03));border-bottom:1px solid rgba(61,184,122,0.2)}
+.tc-hw{padding:10px 16px;background:rgba(232,152,48,0.08);border-bottom:1px solid rgba(232,152,48,0.15)}
+.tc-t{font-size:12px;font-weight:600}
+.tts{color:var(--red2)}.ttb{color:var(--green2)}.ttw{color:var(--amber2)}
+.tc-c{font-size:10px;margin-top:2px;opacity:.75}
+.tc-body{background:var(--dark2);padding:12px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.trl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px}
+.trv{font-family:var(--mono);font-size:13px;font-weight:700}
+.ve{color:var(--text)}.vs{color:var(--red2)}.vt{color:var(--green2)}.va{color:var(--amber2)}
+/* CATALYST */
+.cat-box{background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:11px;color:var(--text2);line-height:1.7}
+.cat-box strong{color:var(--amber2)}
+/* ST */
+.st{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.st::after{content:'';flex:1;height:1px;background:var(--border)}
+/* KEY LEVELS */
+.lv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.lv-card{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.lv-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.lv-v{font-family:var(--mono);font-size:15px;font-weight:700}
+.lr{color:var(--red2)}.lg{color:var(--green2)}.ln{color:var(--text2)}
+.lv-n{font-size:10px;color:var(--text3);margin-top:2px}
+footer{background:var(--dark2);border-top:1px solid var(--border);padding:20px 32px;text-align:center}
+.ft-brand{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue2);letter-spacing:2px;margin-bottom:6px}
+.ft-text{font-size:11px;color:var(--text3);line-height:1.8}
+@media(max-width:600px){.tg{grid-template-columns:1fr}.tab-btn{font-size:10px;padding:6px 10px}.lv-grid{grid-template-columns:1fr 1fr}.main{padding:20px 16px}.hero{padding:24px 16px}nav{padding:12px 16px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <div class="logo-icon">📈</div>
+    <div><div class="logo-text">US STOCKS</div><div class="logo-sub">Daily Trade Plan</div></div>
+  </div>
+  <div class="live-pill"><div class="dot"></div>อัปเดตรายวัน</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-date">3 JUNE 2026</div>
+  <div class="hero-title">US Stocks — Daily Trade Plan</div>
+  <div class="hero-sub">SMC + ICT + Elliott Wave &nbsp;·&nbsp; เลือก symbol ด้านล่าง</div>
+  <div class="blue-divider"></div>
+</div>
+
+<div class="main">
+<div class="tab-wrap">
+  <button class="tab-btn on" onclick="st('nvda',this)">NVDA</button>
+  <button class="tab-btn" onclick="st('mu',this)">MU 🔥</button>
+  <button class="tab-btn" onclick="st('anet',this)">ANET</button>
+  <button class="tab-btn" onclick="st('crwd',this)">CRWD</button>
+  <button class="tab-btn" onclick="st('arm',this)">ARM</button>
+  <button class="tab-btn" onclick="st('avgo',this)">AVGO</button>
+  <button class="tab-btn" onclick="st('tsla',this)">TSLA</button>
+  <button class="tab-btn" onclick="st('lly',this)">LLY</button>
+  <button class="tab-btn" onclick="st('amd',this)">AMD</button>
+  <button class="tab-btn" onclick="st('panw',this)">PANW</button>
+  <button class="tab-btn" onclick="st('okta',this)">OKTA 🔥</button>
+  <button class="tab-btn" onclick="st('v',this)">V</button>
+</div>
+
+<!-- NVDA -->
+<div id="t-nvda" class="tab-pane on">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">NVDA</div><div class="sp-name">Nvidia Corporation &nbsp;·&nbsp; Semiconductor</div></div><div class="sp-right"><div class="sp-price">$211.14</div><div class="sp-chg-n">▼ −1.45%</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-wait"><div class="da"></div><div class="bl-a">รอ Setup</div></div><div class="badge">W Bull / D Neutral</div><div class="badge">Goldman Buy</div><div class="badge">Div Ex 4 Jun</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">Resistance</div><div class="lv-v lr">$224</div><div class="lv-n">Daily OB</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$211</div><div class="lv-n">ใต้ EMA — รอ</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$198–205</div><div class="lv-n">Daily OB</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hw"><div class="tc-t ttw">⏳ รอ Pullback Buy</div><div class="tc-c" style="color:var(--amber2)">รอ retest $210–213 แล้วเข้า Long</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$210–213</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$205</div></div><div><div class="trl">TP</div><div class="trv vt">$225</div></div></div></div>
+  <div class="tc"><div class="tc-hs"><div class="tc-t tts">▼ SELL ถ้า Break ลง</div><div class="tc-c" style="color:var(--red2)">H1 ปิดต่ำกว่า $205</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$204</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$210</div></div><div><div class="trl">TP</div><div class="trv vt">$195</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> Computex keynote · Goldman Buy · Dividend Ex 4 Jun · Rubin CPU · AI demand strong</div>
+</div>
+
+<!-- MU -->
+<div id="t-mu" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">MU</div><div class="sp-name">Micron Technology &nbsp;·&nbsp; Semiconductor</div></div><div class="sp-right"><div class="sp-price">$971.00</div><div class="sp-chg-p">▲ +5.14% 🔥</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Strong</div></div><div class="badge">$1T Club 🔥</div><div class="badge">HBM Sold Out</div><div class="badge">Earn 24 Jun</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">ATH / Resistance</div><div class="lv-v lr">$981</div><div class="lv-n">All-Time High วันนี้</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$971</div><div class="lv-n">ใกล้ ATH</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$920–935</div><div class="lv-n">4H OB + EMA9</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ EMA9 retest แล้วเข้า</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$920–935</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$904</div></div><div><div class="trl">TP</div><div class="trv vt">$1,050</div></div></div></div>
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — ATH Break</div><div class="tc-c" style="color:var(--green2)">ทะลุ ATH $981 ขึ้นไปได้</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$982+</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$955</div></div><div><div class="trl">TP</div><div class="trv vt">$1,050</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> $1 Trillion Market Cap · UBS target $1,625 · HBM sold out 2026 · Q3 Earnings 24 Jun</div>
+</div>
+
+<!-- ANET -->
+<div id="t-anet" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">ANET</div><div class="sp-name">Arista Networks &nbsp;·&nbsp; Networking</div></div><div class="sp-right"><div class="sp-price">$159.47</div><div class="sp-chg-p">▲ +2.70%</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Recovery</div></div><div class="badge">Q1 Beat $2.71B</div><div class="badge">Target $186–210</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">Resistance</div><div class="lv-v lr">$165–172</div><div class="lv-n">ATH zone</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$159</div><div class="lv-n">Recovery phase</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$150–156</div><div class="lv-n">Daily OB + EMA9</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ retest $154–156 แล้วเข้า</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$154–156</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$150</div></div><div><div class="trl">TP</div><div class="trv vt">$172</div></div></div></div>
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Breakout</div><div class="tc-c" style="color:var(--green2)">ทะลุ $165 resistance</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$166+</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$158</div></div><div><div class="trl">TP</div><div class="trv vt">$179</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> AI Ethernet dominance · Q1 revenue +35.1% YoY · Barclays $195 · Rosenblatt $210</div>
+</div>
+
+<!-- CRWD -->
+<div id="t-crwd" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">CRWD</div><div class="sp-name">CrowdStrike Holdings &nbsp;·&nbsp; Cybersecurity</div></div><div class="sp-right"><div class="sp-price">$731.00</div><div class="sp-chg-p">▲ +8.94% 🔥</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Breakout</div></div><div class="badge">Cyber Breakout ✓</div><div class="badge">Near ATH $760</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">Resistance</div><div class="lv-v lr">$760</div><div class="lv-n">ATH zone</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$731</div><div class="lv-n">Post breakout</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$700–710</div><div class="lv-n">Daily OB</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ pullback มา OB $700–710</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$700–710</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$682</div></div><div><div class="trl">TP</div><div class="trv vt">$760</div></div></div></div>
+  <div class="tc"><div class="tc-hw"><div class="tc-t ttw">⏳ รอก่อน</div><div class="tc-c" style="color:var(--amber2)">ขึ้น +8.94% รอ consolidate</div></div><div class="tc-body"><div><div class="trl">Watch</div><div class="trv va">$740–760</div></div><div><div class="trl">Support</div><div class="trv vt">$680</div></div><div><div class="trl">RR</div><div class="trv ve">1:2.0</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> Falcon platform · Gov cybersecurity contracts · Cyber sector breakout วันนี้</div>
+</div>
+
+<!-- ARM -->
+<div id="t-arm" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">ARM</div><div class="sp-name">ARM Holdings &nbsp;·&nbsp; Semiconductor</div></div><div class="sp-right"><div class="sp-price">$353.29</div><div class="sp-chg-p">▲ +5.37% 🔥</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Strong</div></div><div class="badge">AI Chip Design</div><div class="badge">Computex momentum</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">Resistance</div><div class="lv-v lr">$375</div><div class="lv-n">Swing High</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$353</div><div class="lv-n">Strong momentum</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$330–340</div><div class="lv-n">EMA9 zone</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ retest EMA9 $330–340</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$330–340</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$320</div></div><div><div class="trl">TP</div><div class="trv vt">$375</div></div></div></div>
+  <div class="tc"><div class="tc-hw"><div class="tc-t ttw">⏳ รอ Cool Down</div><div class="tc-c" style="color:var(--amber2)">ขึ้น +5% วันนี้ รอ settle</div></div><div class="tc-body"><div><div class="trl">Watch</div><div class="trv va">$350–375</div></div><div><div class="trl">Support</div><div class="trv vt">$320</div></div><div><div class="trl">RR</div><div class="trv ve">1:2.0</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> AI chip design royalties · Computex 2026 · Data center expansion · Strong licensing</div>
+</div>
+
+<!-- AVGO -->
+<div id="t-avgo" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">AVGO</div><div class="sp-name">Broadcom Inc. &nbsp;·&nbsp; Semiconductor</div></div><div class="sp-right"><div class="sp-price">$446.77</div><div class="sp-chg-p">▲ +4.73% 🔥</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Near ATH</div></div><div class="badge">AI ASIC Wins</div><div class="badge">ATH $460</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">ATH Resistance</div><div class="lv-v lr">$460</div><div class="lv-n">All-Time High</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$446</div><div class="lv-n">ใกล้ ATH</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$425–430</div><div class="lv-n">Daily OB</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ pullback OB $425–430</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$425–430</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$415</div></div><div><div class="trl">TP</div><div class="trv vt">$460</div></div></div></div>
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — ATH Break</div><div class="tc-c" style="color:var(--green2)">ทะลุ $460 ATH</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$462+</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$445</div></div><div><div class="trl">TP</div><div class="trv vt">$490</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> AI ASIC custom chips · VMware synergy · Strong AI infrastructure demand · Near ATH</div>
+</div>
+
+<!-- TSLA -->
+<div id="t-tsla" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">TSLA</div><div class="sp-name">Tesla Inc. &nbsp;·&nbsp; EV / Technology</div></div><div class="sp-right"><div class="sp-price">$435.79</div><div class="sp-chg-n">▼ −1.20%</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-wait"><div class="da"></div><div class="bl-a">Neutral — รอ</div></div><div class="badge">FSD Probe</div><div class="badge">Court AU</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">Resistance</div><div class="lv-v lr">$460</div><div class="lv-n">Swing High</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$435</div><div class="lv-n">Consolidating</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support S1</div><div class="lv-v lg">$398</div><div class="lv-n">Weekly OB</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hw"><div class="tc-t ttw">⏳ รอ $398 Hold</div><div class="tc-c" style="color:var(--amber2)">รอ $398 hold + BOS ขึ้น</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$398–405</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$388</div></div><div><div class="trl">TP</div><div class="trv vt">$440</div></div></div></div>
+  <div class="tc"><div class="tc-hs"><div class="tc-t tts">▼ SELL ถ้าหลุด</div><div class="tc-c" style="color:var(--red2)">H1 ปิดต่ำกว่า $398</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$396</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$405</div></div><div><div class="trl">TP</div><div class="trv vt">$375</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> FSD investigation · Australia court · Robotaxi uncertainty · Musk distractions</div>
+</div>
+
+<!-- LLY -->
+<div id="t-lly" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">LLY</div><div class="sp-name">Eli Lilly &amp; Co. &nbsp;·&nbsp; Healthcare</div></div><div class="sp-right"><div class="sp-price">$1,105.00</div><div class="sp-chg-p">▲ +0.92%</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Strong</div></div><div class="badge">GLP-1 Dominance</div><div class="badge">Target $1,150</div></div>
+</div>
+<div class="st">Key Levels</div>
+<div class="lv-grid">
+  <div class="lv-card"><div class="lv-lbl">Resistance / TP</div><div class="lv-v lr">$1,150</div><div class="lv-n">Analyst target</div></div>
+  <div class="lv-card"><div class="lv-lbl">ราคาปัจจุบัน</div><div class="lv-v ln">$1,105</div><div class="lv-n">Above EMA</div></div>
+  <div class="lv-card"><div class="lv-lbl">Support / Entry</div><div class="lv-v lg">$1,050–1,070</div><div class="lv-n">Weekly OB</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ retest $1,050–1,070</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$1,050–70</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$1,030</div></div><div><div class="trl">TP</div><div class="trv vt">$1,150</div></div></div></div>
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Continue</div><div class="tc-c" style="color:var(--green2)">ยืนเหนือ $1,100</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$1,108</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$1,080</div></div><div><div class="trl">TP</div><div class="trv vt">$1,150</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> Mounjaro GLP-1 demand · Tirzepatide pipeline · Strong Q1 momentum</div>
+</div>
+
+<!-- AMD -->
+<div id="t-amd" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">AMD</div><div class="sp-name">Advanced Micro Devices &nbsp;·&nbsp; Semiconductor</div></div><div class="sp-right"><div class="sp-price">$516.10</div><div class="sp-chg-p">▲ +1.88%</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL</div></div><div class="badge">MI300X AI chip</div><div class="badge">Data center wins</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ EMA9 retest $490–500</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$490–500</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$478</div></div><div><div class="trl">TP</div><div class="trv vt">$545</div></div></div></div>
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Breakout</div><div class="tc-c" style="color:var(--green2)">ทะลุ $545 resistance</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$547+</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$530</div></div><div><div class="trl">TP</div><div class="trv vt">$580</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> MI300X AI demand · Data center expansion · Competitive with NVDA in AI inference</div>
+</div>
+
+<!-- PANW -->
+<div id="t-panw" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">PANW</div><div class="sp-name">Palo Alto Networks &nbsp;·&nbsp; Cybersecurity</div></div><div class="sp-right"><div class="sp-price">$281.69</div><div class="sp-chg-p">▲ +9.28% 🔥</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Breakout</div></div><div class="badge">XSIAM Platform</div><div class="badge">Cyber Breakout</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ pullback $265–270</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$265–270</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$258</div></div><div><div class="trl">TP</div><div class="trv vt">$300</div></div></div></div>
+  <div class="tc"><div class="tc-hw"><div class="tc-t ttw">⏳ รอก่อน</div><div class="tc-c" style="color:var(--amber2)">ขึ้น +9.28% รอ cool down</div></div><div class="tc-body"><div><div class="trl">Watch</div><div class="trv va">$280–300</div></div><div><div class="trl">Support</div><div class="trv vt">$258</div></div><div><div class="trl">RR</div><div class="trv ve">1:2.0</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> XSIAM platformization · Government contracts · Cybersecurity sector breakout วันนี้</div>
+</div>
+
+<!-- OKTA -->
+<div id="t-okta" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">OKTA</div><div class="sp-name">Okta Inc. &nbsp;·&nbsp; Identity Security</div></div><div class="sp-right"><div class="sp-price">$123.27</div><div class="sp-chg-p">▲ +30.14% 🔥🔥</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-bull"><div class="dg"></div><div class="bl-g">BULL — Massive Break</div></div><div class="badge">+30% วันนี้!</div><div class="badge">Identity AI</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Pullback</div><div class="tc-c" style="color:var(--green2)">รอ pullback $108–115</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$108–115</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$100</div></div><div><div class="trl">TP</div><div class="trv vt">$135</div></div></div></div>
+  <div class="tc"><div class="tc-hw"><div class="tc-t ttw">⚠️ ระวัง Profit Taking</div><div class="tc-c" style="color:var(--amber2)">+30% วันเดียว — profit taking สูง</div></div><div class="tc-body"><div><div class="trl">Watch</div><div class="trv va">$115–135</div></div><div><div class="trl">Support</div><div class="trv vt">$100</div></div><div><div class="trl">Note</div><div class="trv va">High risk</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> Identity AI platform · Earnings beat · Cyber sector breakout · +30% one-day move</div>
+</div>
+
+<!-- V -->
+<div id="t-v" class="tab-pane">
+<div class="sp-header">
+  <div class="sp-top"><div class="sp-left"><div class="sp-sym">V</div><div class="sp-name">Visa Inc. &nbsp;·&nbsp; Fintech / Payments</div></div><div class="sp-right"><div class="sp-price">$326.36</div><div class="sp-chg-z">— +0.43%</div></div></div>
+  <div class="blue-line"></div>
+  <div class="sp-bias"><div class="bias-wait"><div class="da"></div><div class="bl-a">รอ Setup</div></div><div class="badge">Sideways Range</div><div class="badge">DOJ Risk</div></div>
+</div>
+<div class="tg">
+  <div class="tc"><div class="tc-hb"><div class="tc-t ttb">▲ BUY — Support Zone</div><div class="tc-c" style="color:var(--green2)">รอ $316–318 + BOS ขึ้น M15</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$316–318</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$312</div></div><div><div class="trl">TP</div><div class="trv vt">$335</div></div></div></div>
+  <div class="tc"><div class="tc-hs"><div class="tc-t tts">▼ SELL — Resistance</div><div class="tc-c" style="color:var(--red2)">รอ $335–338 + Reject</div></div><div class="tc-body"><div><div class="trl">Entry</div><div class="trv ve">$336</div></div><div><div class="trl">Stop Loss</div><div class="trv vs">$343</div></div><div><div class="trl">TP</div><div class="trv vt">$316</div></div></div></div>
+</div>
+<div class="cat-box"><strong>Catalyst:</strong> DOJ antitrust risk · EPS +38% strong · $20B buyback · Berkshire sold position</div>
+</div>
+
+<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">ข้อมูลจาก TradingView &nbsp;·&nbsp; 3 มิ.ย. 2026 &nbsp;·&nbsp; ไม่ใช่คำแนะนำการลงทุน</div>
+</div>
+
+<footer>
+  <div class="ft-brand">US STOCKS TRADE PLAN</div>
+  <div class="ft-text">SMC + ICT + Elliott Wave &nbsp;·&nbsp; ไม่ใช่คำแนะนำการลงทุน ใช้ประกอบการตัดสินใจเท่านั้น</div>
+</footer>
+
+<script>
+function st(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('t-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>
