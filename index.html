@@ -1,421 +1,612 @@
-
-<h2 class="sr-only">US Stocks Swing Brief — Route B — สัปดาห์ 9–13 มิ.ย. 2026 — Global Markets, Sectors, Institutional Flows, Watchlist Top 10, News, Verdict</h2>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>US Stocks Trade Plan — 8 มิ.ย. 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+:root{
+  --blue:#4D9FFF;--blue2:#7DB8FF;
+  --dark:#0B0D0F;--dark2:#12151A;--dark3:#1A1F27;--border:#2A333F;
+  --red:#E05555;--red2:#FF7070;
+  --green:#3DB87A;--green2:#5FCFA0;
+  --amber:#E89830;--amber2:#F5B84B;
+  --text:#E8ECF0;--text2:#8A9BB0;--text3:#4A5A70;
+  --mono:'Space Mono',monospace;--sans:'Noto Sans Thai',sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-.w{padding:.5rem 0;font-family:var(--font-sans)}
-.tabs{display:flex;gap:2px;flex-wrap:wrap;border-bottom:.5px solid var(--color-border-tertiary);margin-bottom:.75rem}
-.tb{font-size:11px;padding:6px 11px;border:none;background:transparent;color:var(--color-text-secondary);cursor:pointer;border-bottom:2px solid transparent;font-family:var(--font-sans)}
-.tb.on{color:var(--color-text-primary);border-bottom-color:var(--color-text-primary);font-weight:500}
+body{background:var(--dark);color:var(--text);font-family:var(--sans);min-height:100vh;font-size:13px}
+nav{background:var(--dark2);border-bottom:1px solid var(--border);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-icon{width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,#1a5fa8,var(--blue2));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#042C53;font-family:var(--mono)}
+.logo-text{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--blue2);letter-spacing:2px}
+.logo-sub{font-size:10px;color:var(--text2);margin-top:1px}
+.nav-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.live-pill{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--green2);background:rgba(61,184,122,0.1);border:1px solid rgba(61,184,122,0.25);padding:3px 9px;border-radius:100px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.date-tag{font-size:10px;color:var(--text2);background:var(--dark3);border:1px solid var(--border);padding:3px 9px;border-radius:100px;font-family:var(--mono)}
+
+.market-bar{background:var(--dark2);border-bottom:1px solid var(--border);padding:8px 24px;display:flex;gap:16px;flex-wrap:wrap;overflow-x:auto}
+.mb-item{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.mb-name{font-size:10px;color:var(--text3);font-family:var(--mono)}
+.mb-val{font-size:11px;font-weight:700;font-family:var(--mono)}
+.mb-chg{font-size:10px;font-family:var(--mono)}
+.gn{color:var(--green2)}.rn{color:var(--red2)}.an{color:var(--amber2)}
+
+.main{max-width:1040px;margin:0 auto;padding:20px 16px}
+
+.context-bar{background:rgba(61,184,122,0.08);border:1px solid rgba(61,184,122,0.2);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:rgba(95,207,160,0.85);line-height:1.6}
+.context-title{font-weight:600;color:var(--green2);margin-bottom:2px}
+
+.tab-bar{display:flex;gap:3px;flex-wrap:wrap;background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:5px;margin-bottom:18px}
+.tb{font-family:var(--mono);font-size:10px;font-weight:700;padding:6px 12px;border-radius:7px;border:none;background:transparent;color:var(--text2);cursor:pointer;letter-spacing:.3px;transition:all .15s;white-space:nowrap}
+.tb:hover{color:var(--text);background:var(--dark3)}
+.tb.on{background:var(--dark3);color:var(--blue2);border:1px solid rgba(77,159,255,0.28)}
 .pane{display:none}.pane.on{display:block}
-.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:.7rem}
-.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:.7rem}
-.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:.7rem}
-.mc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.5rem .7rem}
-.ml{font-size:9.5px;color:var(--color-text-secondary);margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
-.mv{font-size:17px;font-weight:500;color:var(--color-text-primary)}
-.mv.g{color:#1D9E75}.mv.r{color:#A32D2D}.mv.a{color:#854F0B}.mv.b{color:#185FA5}
-.ms{font-size:9.5px;color:var(--color-text-secondary);margin-top:1px}
-.ab{border-radius:var(--border-radius-md);padding:9px 13px;margin-bottom:.65rem;border:.5px solid}
-.ab-r{background:#FCEBEB;border-color:#F09595}.ab-a{background:#FAEEDA;border-color:#FAC775}
-.ab-g{background:#EAF3DE;border-color:#C0DD97}.ab-b{background:#E6F1FB;border-color:#B5D4F4}
-.ab-t{font-size:11.5px;font-weight:500;margin-bottom:3px}
-.ab-r .ab-t{color:#A32D2D}.ab-a .ab-t{color:#854F0B}.ab-g .ab-t{color:#3B6D11}.ab-b .ab-t{color:#185FA5}
-.ab-b2{font-size:10.5px;line-height:1.55}
-.ab-r .ab-b2{color:#501313}.ab-a .ab-b2{color:#412402}.ab-g .ab-b2{color:#173404}.ab-b .ab-b2{color:#042C53}
-.sec{font-size:9.5px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.8px;margin:.65rem 0 .4rem;display:flex;align-items:center;gap:5px}
-.sec::after{content:'';flex:1;height:.5px;background:var(--color-border-tertiary)}
-.tw{overflow-x:auto;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-tertiary);margin-bottom:.65rem}
+
+.sec{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;display:flex;align-items:center;gap:6px}
+.sec::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.sp{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden}
+.sp::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(77,159,255,0.06),transparent 70%);pointer-events:none}
+.sp-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+.sp-sym{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue2);letter-spacing:1.5px;background:rgba(77,159,255,0.1);border:1px solid rgba(77,159,255,0.25);padding:3px 9px;border-radius:4px;display:inline-block}
+.sp-name{font-size:11px;color:var(--text2);margin-top:4px}
+.sp-price{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--text);line-height:1;text-align:right}
+.sp-chg-p{font-size:11px;color:var(--green2);margin-top:3px;text-align:right;font-family:var(--mono)}
+.sp-chg-n{font-size:11px;color:var(--red2);margin-top:3px;text-align:right;font-family:var(--mono)}
+.sp-chg-z{font-size:11px;color:var(--amber2);margin-top:3px;text-align:right;font-family:var(--mono)}
+.blue-line{height:1.5px;background:linear-gradient(90deg,var(--blue),var(--blue2),transparent);border-radius:1px;margin:8px 0}
+.bias-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.bp-bull{display:inline-flex;align-items:center;gap:4px;background:rgba(61,184,122,0.12);border:1px solid rgba(61,184,122,0.28);border-radius:100px;padding:3px 10px}
+.bp-bear{display:inline-flex;align-items:center;gap:4px;background:rgba(224,85,85,0.12);border:1px solid rgba(224,85,85,0.28);border-radius:100px;padding:3px 10px}
+.bp-wait{display:inline-flex;align-items:center;gap:4px;background:rgba(232,152,48,0.1);border:1px solid rgba(232,152,48,0.25);border-radius:100px;padding:3px 10px}
+.dg{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s infinite}
+.dr{width:5px;height:5px;border-radius:50%;background:var(--red);animation:blink 1.5s infinite}
+.da{width:5px;height:5px;border-radius:50%;background:var(--amber)}
+.bl-g{font-size:10px;font-weight:600;color:var(--green2)}
+.bl-r{font-size:10px;font-weight:600;color:var(--red2)}
+.bl-a{font-size:10px;font-weight:600;color:var(--amber2)}
+.badge{font-size:9px;color:var(--text2);background:var(--dark3);border:1px solid var(--border);padding:2px 7px;border-radius:100px}
+
+.tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tc{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.tc-hs{padding:8px 12px;background:linear-gradient(90deg,rgba(224,85,85,0.18),rgba(224,85,85,0.04));border-bottom:1px solid rgba(224,85,85,0.2)}
+.tc-hb{padding:8px 12px;background:linear-gradient(90deg,rgba(61,184,122,0.14),rgba(61,184,122,0.03));border-bottom:1px solid rgba(61,184,122,0.18)}
+.tc-hw{padding:8px 12px;background:rgba(232,152,48,0.08);border-bottom:1px solid rgba(232,152,48,0.15)}
+.tc-title{font-size:11px;font-weight:600}
+.tts{color:var(--red2)}.ttb{color:var(--green2)}.ttw{color:var(--amber2)}
+.tc-cond{font-size:9.5px;margin-top:2px;opacity:.75}
+.tc-body{background:var(--dark2);padding:9px 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.trl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.trv{font-family:var(--mono);font-size:12px;font-weight:700}
+.ve{color:var(--text)}.vs{color:var(--red2)}.vt{color:var(--green2)}.va{color:var(--amber2)}
+.rr-pill{font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px}
+.rr-s{background:rgba(224,85,85,0.18);color:var(--red2);border:1px solid rgba(224,85,85,0.3)}
+.rr-b{background:rgba(61,184,122,0.16);color:var(--green2);border:1px solid rgba(61,184,122,0.28)}
+
+.cat-box{background:var(--dark3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin-top:8px;font-size:10.5px;color:var(--text2);line-height:1.6}
+.cat-box strong{color:var(--amber2)}
+
+.tw{overflow-x:auto;border-radius:8px;border:1px solid var(--border);margin-bottom:12px}
 table{width:100%;border-collapse:collapse;font-size:10.5px;table-layout:fixed}
-th{font-size:9px;font-weight:500;color:var(--color-text-secondary);text-align:left;padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);white-space:nowrap}
-td{padding:5px 7px;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
+th{font-size:9px;font-weight:600;color:var(--text3);text-align:left;padding:7px 9px;border-bottom:1px solid var(--border);background:var(--dark3);white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid rgba(42,51,63,0.5);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
+tbody tr:hover td{background:rgba(255,255,255,0.02)}
 tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:var(--color-background-secondary)}
-.bd{display:inline-block;font-size:9px;font-weight:500;padding:1px 6px;border-radius:var(--border-radius-md)}
-.bg{background:#EAF3DE;color:#3B6D11}.br{background:#FCEBEB;color:#A32D2D}
-.ba{background:#FAEEDA;color:#854F0B}.bb{background:#E6F1FB;color:#185FA5}
-.bn{background:var(--color-background-secondary);color:var(--color-text-secondary)}
-.mn{font-family:var(--font-mono);font-size:10px}
-.gn{color:#1D9E75}.rn{color:#A32D2D}.an{color:#854F0B}
-.row{display:flex;align-items:flex-start;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--color-border-tertiary)}
-.row:last-child{border-bottom:none}
-.rn2{font-size:11px;color:var(--color-text-primary);font-weight:500}
-.rs{font-size:9.5px;color:var(--color-text-secondary);margin-top:1px}
-.ni{padding:8px 0;border-bottom:.5px solid var(--color-border-tertiary)}
-.ni:last-child{border-bottom:none}
-.nt{display:inline-block;font-size:9px;font-weight:500;padding:1px 5px;border-radius:var(--border-radius-md);margin-right:3px}
-.nt-r{background:#FCEBEB;color:#A32D2D}.nt-a{background:#FAEEDA;color:#854F0B}
-.nt-g{background:#EAF3DE;color:#3B6D11}.nt-b{background:#E6F1FB;color:#185FA5}
-.nw{font-size:11px;color:var(--color-text-primary);font-weight:500;margin:2px 0 1px}
-.nm{font-size:10.5px;color:var(--color-text-secondary)}
-.nx{font-size:9.5px;color:var(--color-text-tertiary);margin-top:2px}
-.abtn{font-size:9px;padding:2px 6px;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
-.abtn:hover{background:var(--color-background-secondary)}
-.lu{font-size:9px;color:var(--color-text-tertiary);text-align:right;margin-top:.3rem}
-.disc{font-size:9.5px;color:var(--color-text-tertiary);text-align:center;padding:.5rem 0;border-top:.5px solid var(--color-border-tertiary);margin-top:.5rem;line-height:1.6}
-.sb-w{width:50px;height:4px;background:var(--color-border-tertiary);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:3px}
-.sb{height:100%;border-radius:2px}
-.sector-bar{height:6px;border-radius:2px;margin-top:3px}
+.bd{display:inline-block;font-size:9px;font-weight:600;padding:1px 6px;border-radius:4px}
+.bg{background:rgba(61,184,122,0.15);color:var(--green2);border:1px solid rgba(61,184,122,0.3)}
+.br{background:rgba(224,85,85,0.15);color:var(--red2);border:1px solid rgba(224,85,85,0.3)}
+.ba{background:rgba(232,152,48,0.13);color:var(--amber2);border:1px solid rgba(232,152,48,0.28)}
+.bb{background:rgba(77,159,255,0.12);color:var(--blue2);border:1px solid rgba(77,159,255,0.25)}
+.sbar-w{width:44px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:3px}
+.sbar{height:100%;border-radius:2px}
+.rb{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:700;font-family:var(--mono)}
+.r1{background:rgba(245,184,75,0.2);color:var(--amber2)}.r2{background:rgba(180,178,169,0.15);color:#B4B2A9}.r3{background:rgba(208,146,107,0.15);color:#D0926B}
+.rn-b{background:var(--dark3);color:var(--text3)}
+
+footer{background:var(--dark2);border-top:1px solid var(--border);padding:16px 24px;text-align:center;margin-top:8px}
+.ft-brand{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue2);letter-spacing:2px;margin-bottom:4px}
+.ft-text{font-size:10px;color:var(--text3);line-height:1.8}
+
+@media(max-width:600px){
+  .tc-grid{grid-template-columns:1fr}.main{padding:14px 10px}
+  nav{padding:10px 12px}.market-bar{padding:6px 12px}
+  .sp-price{font-size:20px}
+}
 </style>
+</head>
+<body>
 
-<div class="w">
-<div class="tabs">
-  <button class="tb on" onclick="sw('brief',this)">Opening Brief</button>
-  <button class="tb" onclick="sw('global',this)">Global Markets</button>
-  <button class="tb" onclick="sw('sectors',this)">Sectors</button>
-  <button class="tb" onclick="sw('flows',this)">Institutional Flows</button>
-  <button class="tb" onclick="sw('watchlist',this)">Watchlist Top 10</button>
-  <button class="tb" onclick="sw('news',this)">News</button>
-  <button class="tb" onclick="sw('verdict',this)">Verdict</button>
+<nav>
+  <div class="logo">
+    <div class="logo-icon">US</div>
+    <div><div class="logo-text">US STOCKS</div><div class="logo-sub">Daily Trade Plan · SMC + ICT</div></div>
+  </div>
+  <div class="nav-right">
+    <div class="live-pill"><div class="dot"></div>Live Prices</div>
+    <div class="date-tag">8 JUN 2026</div>
+  </div>
+</nav>
+
+<div class="market-bar">
+  <div class="mb-item"><span class="mb-name">S&P500</span><span class="mb-val an">7,383</span><span class="mb-chg rn">−2.64%</span></div>
+  <div class="mb-item"><span class="mb-name">NASDAQ</span><span class="mb-val an">25,709</span><span class="mb-chg rn">−4.18% Fri</span></div>
+  <div class="mb-item"><span class="mb-name">10Y</span><span class="mb-val rn">&gt;4.5%</span><span class="mb-chg rn">Rate Fear</span></div>
+  <div class="mb-item"><span class="mb-name">CPI</span><span class="mb-val an">อ. 10 มิ.ย.</span><span class="mb-chg an">Key Event</span></div>
+  <div class="mb-item"><span class="mb-name">Bias</span><span class="mb-val gn">Semi Bounce</span><span class="mb-chg gn">วันนี้</span></div>
 </div>
 
-<!-- TAB 1: OPENING BRIEF -->
-<div id="p-brief" class="pane on">
-  <div class="ab ab-r">
-    <div class="ab-t">US Market Week — 9–13 มิ.ย. 2026</div>
-    <div class="ab-b2">Nasdaq −4.18% วันศุกร์ worst day since April 2025 · Chip selloff triggered by AVGO earnings miss · NFP May 172K vs คาด 80K → rate hike fears กลับมา · S&P 500 weekly −2%, Nasdaq weekly −4.7%</div>
-  </div>
+<div class="main">
 
-  <div class="g4">
-    <div class="mc"><div class="ml">S&P 500</div><div class="mv r">7,383</div><div class="ms">−2.64% Fri [Prev Close 6 Jun]</div></div>
-    <div class="mc"><div class="ml">Nasdaq</div><div class="mv r">25,709</div><div class="ms">−4.18% Fri [Prev Close 6 Jun]</div></div>
-    <div class="mc"><div class="ml">Dow Jones</div><div class="mv a">50,867</div><div class="ms">−1.35% Fri [Prev Close 6 Jun]</div></div>
-    <div class="mc"><div class="ml">10Y Treasury</div><div class="mv r">&gt;4.5%</div><div class="ms">30Y &gt;5% · rate fear</div></div>
-  </div>
-
-  <div class="g3">
-    <div class="mc"><div class="ml">NFP May 2026</div><div class="mv a">172K</div><div class="ms">vs คาด 80K (+115%)</div></div>
-    <div class="mc"><div class="ml">Key event สัปดาห์หน้า</div><div class="mv b">CPI</div><div class="ms">10 มิ.ย. อ. — ตัวชี้ขาด</div></div>
-    <div class="mc"><div class="ml">Swing bias</div><div class="mv a">Selective</div><div class="ms">Non-tech defensive</div></div>
-  </div>
-
-  <div class="sec">Weekly key levels</div>
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px">
-    <div class="row"><div><div class="rn2">Nasdaq resistance</div><div class="rs">แนวต้านสัปดาห์หน้า</div></div><div class="mn" style="font-size:12px">26,500</div></div>
-    <div class="row"><div><div class="rn2">Nasdaq support</div><div class="rs">ถ้าหลุด → ลงต่อ</div></div><div class="mn rn" style="font-size:12px">25,000</div></div>
-    <div class="row"><div><div class="rn2">S&P 500 support</div><div class="rs">key level สัปดาห์หน้า</div></div><div class="mn" style="font-size:12px">7,300</div></div>
-    <div class="row"><div><div class="rn2">Watchlist weekly support</div><div class="rs">WLDN $95 · LLY $1,100 · CL $84</div></div><div class="mn" style="font-size:12px">See Top 10</div></div>
-  </div>
-  <div class="lu">Source: CNBC, Trading Economics, Schwab · [Prev Close 6 Jun 2026]</div>
+<div class="context-bar">
+  <div class="context-title">Market Context วันนี้ 8 มิ.ย. 2026</div>
+  Semiconductor bounce แรง — MRVL +13.67%, KLAC +8%, ALAB +9.93%, MU +9.33% หลังจาก sell-off หนักศุกร์ที่แล้ว · ASML +6.67%, SNDK +6.11% · ตลาดเปิด green กว้าง · CPI วันอังคาร 10 มิ.ย. = ตัวชี้ขาดว่า bounce จะต่อได้ไหม
 </div>
 
-<!-- TAB 2: GLOBAL MARKETS -->
-<div id="p-global" class="pane">
-  <div class="sec">US Markets [Prev Close 6 Jun 2026]</div>
-  <div class="tw"><table style="min-width:0">
-    <thead><tr><th style="width:100px">Index</th><th style="width:85px">Close</th><th style="width:70px">Change</th><th>What it means</th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:500">S&P 500</td><td class="mn">7,383.74</td><td><span class="rn">−2.64%</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Worst week since April tariff shock</td></tr>
-      <tr><td style="font-weight:500">Nasdaq</td><td class="mn">25,709.43</td><td><span class="rn">−4.18%</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Worst day since April 2025 · semi rout</td></tr>
-      <tr><td style="font-weight:500">Dow Jones</td><td class="mn">50,866.78</td><td><span class="rn">−1.35%</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Defensive outperformed · less damage</td></tr>
-      <tr><td style="font-weight:500">10Y Yield</td><td class="mn">&gt;4.5%</td><td><span class="rn">Rising</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Rate hike fear → tech headwind</td></tr>
-      <tr><td style="font-weight:500">30Y Yield</td><td class="mn">&gt;5.0%</td><td><span class="rn">Rising</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Highest level 2026 · growth stocks hit</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="sec">Global Ripple [Prev Close 6 Jun 2026]</div>
-  <div class="tw"><table style="min-width:0">
-    <thead><tr><th style="width:130px">Market</th><th style="width:80px">Change</th><th>Trigger</th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:500">Korea Kospi</td><td><span class="rn">−5.54%</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Samsung −6.4%, SK Hynix −9.92%</td></tr>
-      <tr><td style="font-weight:500">ASML (Netherlands)</td><td><span class="rn">−3.8%</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Global semi chain reaction</td></tr>
-      <tr><td style="font-weight:500">Infineon (Germany)</td><td><span class="rn">−6%+</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Europe chip sympathy sell</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="ab ab-b">
-    <div class="ab-t">JPMorgan Weekly Recap — June 1, 2026</div>
-    <div class="ab-b2">US equities rallied 19% from March 30 low · AI supply chain broadening beyond hyperscalers · Q1 earnings growth extraordinary across AI sector — but chip selloff สัปดาห์นี้ทดสอบ narrative ครับ</div>
-  </div>
-
-  <div class="ab ab-a">
-    <div class="ab-t">Schwab Weekly Outlook — 5 Jun 2026</div>
-    <div class="ab-b2">S&P 500 rallied 20.6% from March 30 without healthy pullback · SpaceX IPO starts next Friday · June seasonality not bullish · dip buyers have shown up on prior pullbacks</div>
-  </div>
-  <div class="lu">Source: CNBC Live Updates · JPMorgan Weekly Recap · Schwab Weekly Outlook · 6 Jun 2026</div>
+<div class="tab-bar">
+  <button class="tb on" onclick="st('mrvl',this)">MRVL 🔥</button>
+  <button class="tb" onclick="st('klac',this)">KLAC 🔥</button>
+  <button class="tb" onclick="st('alab',this)">ALAB 🔥</button>
+  <button class="tb" onclick="st('mu',this)">MU</button>
+  <button class="tb" onclick="st('wldn',this)">WLDN</button>
+  <button class="tb" onclick="st('lly',this)">LLY</button>
+  <button class="tb" onclick="st('tsla',this)">TSLA</button>
+  <button class="tb" onclick="st('aapl',this)">AAPL</button>
+  <button class="tb" onclick="st('amd',this)">AMD</button>
+  <button class="tb" onclick="st('overview',this)">Overview</button>
 </div>
 
-<!-- TAB 3: SECTORS -->
-<div id="p-sectors" class="pane">
-  <div class="sec">S&P 500 Sector Rotation — สัปดาห์ 2–6 มิ.ย. 2026</div>
-
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:10px 12px;margin-bottom:.65rem">
-    <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Ranked best → worst (weekly performance)</div>
-
-    <div id="sector-list"></div>
+<!-- MRVL -->
+<div id="t-mrvl" class="pane on">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">MRVL</div><div class="sp-name">Marvell Technology · Semiconductor</div></div>
+    <div><div class="sp-price">$299.48</div><div class="sp-chg-p">▲ +13.67% วันนี้ 🔥</div></div>
   </div>
-
-  <div class="g2">
-    <div class="ab ab-g" style="margin-bottom:0">
-      <div class="ab-t">Top sector: Consumer Staples</div>
-      <div class="ab-b2">Staples outperformed amid selloff · Coca-Cola +2.06%, Sherwin-Williams +2.05%, McDonald's +1.95% ในวันที่ตลาดลง</div>
-    </div>
-    <div class="ab ab-r" style="margin-bottom:0">
-      <div class="ab-t">Weakest: Semiconductors</div>
-      <div class="ab-b2">MU −17%, Intel −9%, AMD −12.6% over 2 days · AVGO earnings miss trigger · Global chip selloff</div>
-    </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Bounce Strong</div></div>
+    <div class="badge">20D +82.93%</div>
+    <div class="badge">H $324.20</div>
+    <div class="badge">L $263.47 ศุกร์</div>
   </div>
-
-  <div class="sec" style="margin-top:.7rem">Sector rotation signal สัปดาห์หน้า</div>
-  <div class="ab ab-a">
-    <div class="ab-t">Money moving: Tech → Defensive</div>
-    <div class="ab-b2">Capital flows from high-growth cyclicals to defensives · Staples record inflows · Healthcare, utilities gaining relative strength · เหมาะกับ swing ที่หลีกเลี่ยง chip ครับ</div>
-  </div>
-
-  <div class="tw"><table style="min-width:0">
-    <thead><tr><th>Sector</th><th style="width:90px">Stance สัปดาห์หน้า</th><th>Watchlist stocks</th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:500">Healthcare</td><td><span class="bd bg">Overweight</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">LLY, JNJ, MRK, ABT, ISRG</td></tr>
-      <tr><td style="font-weight:500">Consumer Staples</td><td><span class="bd bg">Overweight</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">CL, COST</td></tr>
-      <tr><td style="font-weight:500">Cybersecurity</td><td><span class="bd ba">Neutral</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">CRWD, PANW, OKTA, ZS, FTNT</td></tr>
-      <tr><td style="font-weight:500">Financials/Payments</td><td><span class="bd ba">Neutral</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">V</td></tr>
-      <tr><td style="font-weight:500">Non-chip Tech</td><td><span class="bd ba">Neutral</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">AAPL, CSCO, CRM, ADBE</td></tr>
-      <tr><td style="font-weight:500">Semiconductors</td><td><span class="bd br">Underweight</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">NVDA, AMD, MU, AVGO, LRCX, AMAT</td></tr>
-      <tr><td style="font-weight:500">AI Memory/Storage</td><td><span class="bd br">Avoid</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">MU, MRVL, STX, SNDK, WDC</td></tr>
-    </tbody>
-  </table></div>
-  <div class="lu">Source: CNBC, Investing.com, Trading Economics · 6 Jun 2026</div>
-</div>
-
-<!-- TAB 4: INSTITUTIONAL FLOWS -->
-<div id="p-flows" class="pane">
-  <div class="sec">Institutional Flow Signal สัปดาห์นี้</div>
-
-  <div class="g2">
-    <div class="mc"><div class="ml">สัปดาห์ S&P 500</div><div class="mv r">−2.0%</div><div class="ms">Weekly [Prev Close 6 Jun]</div></div>
-    <div class="mc"><div class="ml">สัปดาห์ Nasdaq</div><div class="mv r">−4.7%</div><div class="ms">Weekly [Prev Close 6 Jun]</div></div>
-  </div>
-
-  <div class="ab ab-r">
-    <div class="ab-t">Chip sector — massive institutional exit</div>
-    <div class="ab-b2">Micron Technology dropped 17%, Intel 9%, AMD 12.6% over last 2 trading days · ASML −3.8% · SK Hynix −9.92% · สัญญาณ institutional sell ชัดเจน</div>
-  </div>
-
-  <div class="ab ab-g">
-    <div class="ab-t">Defensive rotation — record inflows</div>
-    <div class="ab-b2">Bank of America: 4-week average net flows into staples stocks at all-time high in dataset stretching back to 2008 · Unprecedented surge as market participants seek shelter</div>
-  </div>
-
-  <div class="ab ab-b">
-    <div class="ab-t">SpaceX IPO — ระวัง liquidity drain</div>
-    <div class="ab-b2">SpaceX, highest valued IPO in history, begins trading next Friday · Investors may be raising funds by selling recent winners · Factor in market pressure this week</div>
-  </div>
-
-  <div class="sec">Flow Summary ตาม Sector</div>
-  <div class="tw"><table style="min-width:0">
-    <thead><tr><th>Sector</th><th style="width:100px">Flow Direction</th><th>Signal</th></tr></thead>
-    <tbody>
-      <tr><td style="font-weight:500">Consumer Staples</td><td><span class="bd bg">Inflow (Record)</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">BofA: All-time high inflows 2026</td></tr>
-      <tr><td style="font-weight:500">Healthcare</td><td><span class="bd bg">Inflow</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Defensive rotation · LLY, JNJ strong</td></tr>
-      <tr><td style="font-weight:500">Utilities</td><td><span class="bd bg">Inflow</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">Rate-sensitive but defensive bid</td></tr>
-      <tr><td style="font-weight:500">Cybersecurity</td><td><span class="bd ba">Neutral</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">CRWD earnings beat — holding up</td></tr>
-      <tr><td style="font-weight:500">Semiconductors</td><td><span class="bd br">Outflow (Heavy)</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">AVGO miss → sector-wide exit</td></tr>
-      <tr><td style="font-weight:500">AI Memory</td><td><span class="bd br">Outflow (Extreme)</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">MU −17% — profit taking massive</td></tr>
-    </tbody>
-  </table></div>
-
-  <div style="font-size:10.5px;color:var(--color-text-secondary);line-height:1.7;padding:8px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)">
-    สัปดาห์หน้า: เงินไหลออกจาก Semiconductor ยังไม่จบ · CPI อังคาร 10 มิ.ย. จะชี้ขาดว่า defensive rotation จะแรงขึ้นหรือเริ่ม reverse · ถ้า CPI สูง → ไหลเข้า defensive ต่อ · ถ้า CPI ต่ำกว่าคาด → tech อาจ bounce
-  </div>
-  <div class="lu">Source: BofA Global Research via Finviz · CNBC · Schwab Weekly Outlook · 6 Jun 2026</div>
-</div>
-
-<!-- TAB 5: WATCHLIST TOP 10 -->
-<div id="p-watchlist" class="pane">
-  <div class="ab ab-b">
-    <div class="ab-b2">Watchlist จาก TradingView จริง 60 symbols · Scan Daily OHLCV · Scorecard 8 ข้อ · คัด Top 10 สัปดาห์หน้า</div>
-  </div>
-
-  <div class="g4">
-    <div class="mc"><div class="ml">Watchlist ทั้งหมด</div><div class="mv">60</div></div>
-    <div class="mc"><div class="ml">Ready Now</div><div class="mv g">2</div></div>
-    <div class="mc"><div class="ml">Watch</div><div class="mv a">5</div></div>
-    <div class="mc"><div class="ml">Skip/Avoid</div><div class="mv r">3</div></div>
-  </div>
-
-  <div class="tw"><table style="min-width:600px">
-    <thead><tr>
-      <th style="width:28px">#</th>
-      <th style="width:65px">Symbol</th>
-      <th style="width:72px">ราคา</th>
-      <th style="width:50px">%20D</th>
-      <th style="width:60px">Sector</th>
-      <th style="width:65px">Score</th>
-      <th style="width:80px">Setup</th>
-      <th style="width:52px">Entry?</th>
-      <th style="width:42px">Deep</th>
-    </tr></thead>
-    <tbody id="wl-tb"></tbody>
-  </table></div>
-
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:10px 12px;margin-bottom:.5rem">
-    <div style="font-size:9.5px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px">Best candidate สัปดาห์ 9–13 มิ.ย.</div>
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-      <div>
-        <span style="font-size:15px;font-weight:500">WLDN</span>
-        <span style="font-size:11px;color:var(--color-text-secondary);margin-left:5px">Willdan Group · $97.21</span>
-        <div style="font-size:10.5px;color:var(--color-text-secondary);margin-top:3px">Score 7/8 · 4/4 gates · <span style="color:#1D9E75;font-weight:500">Ready to enter</span></div>
-        <div style="font-size:10.5px;color:var(--color-text-secondary);margin-top:4px;padding:5px 8px;background:var(--color-background-primary);border-radius:var(--border-radius-md);border:.5px solid var(--color-border-tertiary)">Inside Bar ใต้ ATH $101 — setup active ถ้าทะลุ $101 พร้อม volume พรุ่งนี้</div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hs">
+        <div class="tc-title tts">▼ Short-term Sell (ถ้า bounce fade)</div>
+        <div class="tc-cond tts">ขึ้น $310–320 แล้ว reject + H1 ปิดแดง</div>
       </div>
-      <button class="abtn" style="flex-shrink:0" onclick='sendPrompt("วิเคราะห์ WLDN Swing Trade entry SL TP สัปดาห์ 9-13 มิถุนายน 2026")'>วิเคราะห์ ↗</button>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$310–320</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$328</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$270</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy Dip (ถ้า pullback)</div>
+        <div class="tc-cond ttb">Pullback $280–290 + H1 bullish confirm</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$280–290</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$268</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$324</div></div>
+      </div>
     </div>
   </div>
-  <div class="lu">ข้อมูล TradingView Watchlist จริง · Daily scan · 7 มิ.ย. 2026 · ไม่ใช่คำแนะนำการลงทุน</div>
-</div>
-
-<!-- TAB 6: NEWS -->
-<div id="p-news" class="pane">
-  <div class="sec">News สำคัญ 5 วันที่ผ่านมา</div>
-
-  <div class="ni">
-    <span class="nt nt-r">ALERT</span>
-    <div class="nw">AVGO earnings miss — AI chip outlook ไม่ raise → Semiconductor rout</div>
-    <div class="nm">Broadcom ไม่ปรับเพิ่ม full-year AI chip outlook → AVGO −17.5% จาก high → ลาม MU, AMD, NVDA, LRCX ทั่ว sector</div>
-    <div class="nx">4–5 Jun 2026 · <a href="https://www.cnbc.com/2026/06/04/stock-market-today-live-updates.html" target="_blank" style="color:var(--color-text-info)">CNBC Live Updates →</a></div>
-  </div>
-
-  <div class="ni">
-    <span class="nt nt-r">MACRO</span>
-    <div class="nw">NFP May 172K vs คาด 80K — ตลาดแรงงานแข็งแกร่งผิดคาดมาก</div>
-    <div class="nm">Treasury yields rose sharply, with 10-year yield rising above 4.5% and 30-year yield topping 5%, fueling concerns that elevated borrowing costs could weigh on the economy</div>
-    <div class="nx">6 Jun 2026 · <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank" style="color:var(--color-text-info)">Schwab Market Update →</a></div>
-  </div>
-
-  <div class="ni">
-    <span class="nt nt-a">SECTOR</span>
-    <div class="nw">Global chip selloff — Korea, Europe ลามตาม US</div>
-    <div class="nm">South Korea stocks plunged Friday, Kospi ended 5.54% lower · Samsung Electronics and SK Hynix dropped 6.40% and 9.92% · ASML −3.8%, Infineon −6%+</div>
-    <div class="nx">6 Jun 2026 · CNBC Live Updates</div>
-  </div>
-
-  <div class="ni">
-    <span class="nt nt-g">POSITIVE</span>
-    <div class="nw">Defensive rotation — Consumer Staples record inflows จาก institutions</div>
-    <div class="nm">Dow Jones top gainers วันที่ตลาดลง: Coca-Cola +2.06%, Sherwin-Williams +2.05%, McDonald's +1.95% · สัญญาณ rotation ชัดเจน</div>
-    <div class="nx">5–6 Jun 2026 · Trading Economics</div>
-  </div>
-
-  <div class="ni">
-    <span class="nt nt-b">EVENT</span>
-    <div class="nw">FIFA World Cup เริ่ม 11 มิ.ย. US — อาจส่งผล volume และ payrolls</div>
-    <div class="nm">Leisure and hospitality added 70K jobs out of 92K private services gains · World Cup preparations driving outsized payroll surprise</div>
-    <div class="nx">6 Jun 2026 · CNBC</div>
-  </div>
-
-  <div class="ni">
-    <span class="nt nt-b">EVENT</span>
-    <div class="nw">SpaceX IPO — highest-valued IPO in history เริ่ม trade ศุกร์หน้า</div>
-    <div class="nm">SpaceX begins trading next Friday · Investors may be raising funds by selling recent winners to fund IPO allocation</div>
-    <div class="nx">5 Jun 2026 · Schwab Weekly Outlook</div>
-  </div>
-
-  <div class="sec">Calendar สัปดาห์หน้า (ตาม UTC+7)</div>
-  <div class="tw"><table style="min-width:0">
-    <thead><tr><th style="width:80px">วัน</th><th style="width:120px">Event</th><th>ผลต่อ Watchlist</th></tr></thead>
-    <tbody>
-      <tr><td>จ. 9 มิ.ย.</td><td style="font-weight:500">Fed speakers</td><td style="font-size:9.5px;color:var(--color-text-secondary)">Hawkish → tech กดดัน, defensive แข็ง</td></tr>
-      <tr><td style="color:#A32D2D;font-weight:500">อ. 10 มิ.ย.</td><td style="font-weight:500;color:#A32D2D">CPI May 2026</td><td style="font-size:9.5px;color:#A32D2D">ตัวชี้ขาดสัปดาห์ — สูงกว่าคาด → Nasdaq ลง</td></tr>
-      <tr><td>พ. 11 มิ.ย.</td><td style="font-weight:500">FIFA + PPI May</td><td style="font-size:9.5px;color:var(--color-text-secondary)">Volume อาจบาง · Leisure stocks</td></tr>
-      <tr><td>พฤ. 12 มิ.ย.</td><td style="font-weight:500">Jobless Claims</td><td style="font-size:9.5px;color:var(--color-text-secondary)">แรงงานแข็ง → rate fear ต่อ</td></tr>
-      <tr><td>ศ. 13 มิ.ย.</td><td style="font-weight:500">SpaceX IPO + Michigan</td><td style="font-size:9.5px;color:var(--color-text-secondary)">Liquidity drain · Consumer sentiment</td></tr>
-    </tbody>
-  </table></div>
-  <div class="lu">Source: CNBC · Schwab · Trading Economics · 6 Jun 2026</div>
-</div>
-
-<!-- TAB 7: VERDICT -->
-<div id="p-verdict" class="pane">
-  <div style="background:#FCEBEB;border:.5px solid #F09595;border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:.65rem">
-    <div style="font-size:13px;font-weight:500;color:#A32D2D;margin-bottom:4px">Semiconductor Sector — หลีกเลี่ยงสัปดาห์นี้</div>
-    <div style="font-size:10.5px;color:#501313;line-height:1.6">AVGO earnings miss trigger ยังส่งผล · Rate hike fear จาก NFP 172K กดดัน growth stocks · รอ CPI วันอังคาร ก่อนตัดสินใจเรื่อง chip</div>
-  </div>
-
-  <div style="background:#EAF3DE;border:.5px solid #C0DD97;border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:.65rem">
-    <div style="font-size:13px;font-weight:500;color:#3B6D11;margin-bottom:4px">Defensive + Non-tech — Selective opportunity</div>
-    <div style="font-size:10.5px;color:#173404;line-height:1.6">LLY, WLDN, CL — ยืนได้ดีกว่าในสัปดาห์ที่ Nasdaq ผันผวน · Institutional rotation ยืนยัน · Healthcare + Staples รับเงินต่อเนื่อง</div>
-  </div>
-
-  <div style="background:#FAEEDA;border:.5px solid #FAC775;border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:.65rem">
-    <div style="font-size:13px;font-weight:500;color:#854F0B;margin-bottom:4px">Key trigger: CPI อังคาร 10 มิ.ย.</div>
-    <div style="font-size:10.5px;color:#412402;line-height:1.6">CPI สูงกว่าคาด → Tech กดดันหนักขึ้น → defensive แข็งต่อ · CPI ต่ำกว่าคาด → tech อาจ bounce · ลด position size 50% ก่อน CPI</div>
-  </div>
-
-  <div class="sec">Swing Plan สัปดาห์ 9–13 มิ.ย.</div>
-  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:10.5px;color:var(--color-text-secondary);line-height:1.9">
-    <span style="color:var(--color-text-primary);font-weight:500">1.</span> WLDN — Score 7/8 · รอทะลุ $101 + volume · SL $89.50 · TP $107 · RR 1:2.1<br>
-    <span style="color:var(--color-text-primary);font-weight:500">2.</span> LLY — Score 7/8 · รอ pullback $1,100–1,115 · SL $1,079 · TP $1,166 · RR 1:2.2<br>
-    <span style="color:var(--color-text-primary);font-weight:500">3.</span> CL — Score 6/8 · $88–90 entry · SL $84.30 · TP $92 · Defensive rotation play<br>
-    <span style="color:var(--color-text-primary);font-weight:500">4.</span> Healthcare watchlist — JNJ, MRK, ABT, ISRG มี positive change วันศุกร์<br>
-    <span style="color:var(--color-text-primary);font-weight:500">5.</span> หลีกเลี่ยง: NVDA, AMD, MU, AVGO, LRCX, AMAT, MRVL, ALAB ทั้งหมด<br>
-    <span style="color:var(--color-text-primary);font-weight:500">6.</span> Confidence: Medium · ลด size 50% จนกว่า CPI ผ่านไปก่อน
-  </div>
-
-  <div class="ab ab-b" style="margin-top:.65rem">
-    <div class="ab-t">Long-term context ยังดีอยู่</div>
-    <div class="ab-b2">Fundamentals are intact — economy strong, AI infrastructure build-out still in expansionary phase, dip buyers have shown up on prior pullbacks · Pullback นี้ = โอกาสสำหรับ non-chip ครับ</div>
-  </div>
-
-  <div class="lu">Sources: CNBC · JPMorgan · Schwab · BofA · Trading Economics · TradingView Watchlist · 6–7 Jun 2026</div>
-  <div class="disc">
-    AI-generated from real TradingView data and cited news sources · Educational only<br>
-    Not financial advice · Not a recommendation to buy or sell<br>
-    Consult a registered investment advisor before any trading decisions
-  </div>
+  <div class="cat-box"><strong>Context:</strong> ร่วงจาก ATH $324 → $263 ศุกร์ (AVGO miss) · Bounce +13.67% วันนี้ · รอดูว่า CPI อังคาร จะทำให้ bounce ต่อหรือ fade</div>
 </div>
 </div>
+
+<!-- KLAC -->
+<div id="t-klac" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">KLAC</div><div class="sp-name">KLA Corporation · Semiconductor Equipment</div></div>
+    <div><div class="sp-price">$2,083.56</div><div class="sp-chg-p">▲ +8.00% วันนี้ 🔥</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Strong Bounce</div></div>
+    <div class="badge">20D +12.53%</div>
+    <div class="badge">ATH $2,156</div>
+    <div class="badge">Low $1,929 ศุกร์</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hw">
+        <div class="tc-title ttw">⏳ รอก่อน — ขึ้นเร็วเกิน</div>
+        <div class="tc-cond ttw">ขึ้น +8% วันเดียว รอ cool down</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Watch</div><div class="trv va">$2,100–2,156</div></div>
+        <div><div class="trl">Support</div><div class="trv vt">$2,000</div></div>
+        <div><div class="trl">ATH</div><div class="trv ve">$2,156</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy Pullback</div>
+        <div class="tc-cond ttb">Pullback $2,000–2,020 + ยืนเหนือ EMA</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$2,000–2,020</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$1,960</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$2,156</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> Wafer inspection dominance · 20D range $1,690–$2,156 · Bounce จาก Low $1,929 ศุกร์ → $2,083 วันนี้ · ยังต่ำกว่า ATH $2,156</div>
+</div>
+</div>
+
+<!-- ALAB -->
+<div id="t-alab" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">ALAB</div><div class="sp-name">Astera Labs · AI Connectivity</div></div>
+    <div><div class="sp-price">$348.54</div><div class="sp-chg-p">▲ +9.93% วันนี้ 🔥</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Strong Bounce</div></div>
+    <div class="badge">20D +77.47%</div>
+    <div class="badge">ATH $372</div>
+    <div class="badge">Bounce จาก $317</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hw">
+        <div class="tc-title ttw">⏳ รอ Stabilize ก่อน</div>
+        <div class="tc-cond ttw">+9.93% วันเดียว — รอ base ก่อน</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Watch</div><div class="trv va">$340–372</div></div>
+        <div><div class="trl">Support</div><div class="trv vt">$320</div></div>
+        <div><div class="trl">ATH</div><div class="trv ve">$372</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy ATH Break</div>
+        <div class="tc-cond ttb">Daily close เหนือ ATH $372 + volume</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$373+</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$348</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$410</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> AI connectivity chips · Parabolic +77% ใน 20D · ร่วงจาก ATH $372 → $317 ศุกร์ · Bounce กลับแรงวันนี้ · รอ CPI ก่อนตัดสินใจ</div>
+</div>
+</div>
+
+<!-- MU -->
+<div id="t-mu" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">MU</div><div class="sp-name">Micron Technology · Memory/HBM</div></div>
+    <div><div class="sp-price">$944.59</div><div class="sp-chg-p">▲ +9.33% วันนี้</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Bounce จาก Low</div></div>
+    <div class="badge">ATH $1,089</div>
+    <div class="badge">Low $864 ศุกร์</div>
+    <div class="badge">Earn 24 Jun</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hw">
+        <div class="tc-title ttw">⏳ รอก่อน CPI</div>
+        <div class="tc-cond ttw">ยังมี downside risk ถ้า CPI สูง</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Watch</div><div class="trv va">$940–1,000</div></div>
+        <div><div class="trl">Support</div><div class="trv vt">$864</div></div>
+        <div><div class="trl">Resist.</div><div class="trv vs">$1,000</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy ถ้า $1,000 Break</div>
+        <div class="tc-cond ttb">Daily close เหนือ $1,000 + volume แรง</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$1,002+</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$960</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$1,089</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> HBM memory dominance · ร่วงจาก ATH $1,089 → $864 ศุกร์ (−17%) · Bounce +9.33% วันนี้ · Earnings 24 มิ.ย. = catalyst ใหญ่</div>
+</div>
+</div>
+
+<!-- WLDN -->
+<div id="t-wldn" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">WLDN</div><div class="sp-name">Willdan Group · Government Services</div></div>
+    <div><div class="sp-price">$99.26</div><div class="sp-chg-p">▲ +2.11% วันนี้</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Bull — Near ATH</div></div>
+    <div class="badge">20D +13.7%</div>
+    <div class="badge">ATH $101</div>
+    <div class="badge">Score 7/8</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy ATH Breakout</div>
+        <div class="tc-cond ttb">Daily close เหนือ $101 + volume ขยาย</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$101.50+</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$95</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$107</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy Current Zone</div>
+        <div class="tc-cond ttb">ยืนเหนือ $97 + ไม่มีขาลงแรง</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$97–99</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$93</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$107</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> Defensive Non-tech · ไม่ได้รับผลจาก chip selloff · Uptrend สม่ำเสมอ 20D · วันนี้ทดสอบ ATH $101 อีกครั้ง · Best swing setup ในสัปดาห์นี้</div>
+</div>
+</div>
+
+<!-- LLY -->
+<div id="t-lly" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">LLY</div><div class="sp-name">Eli Lilly · Healthcare / GLP-1</div></div>
+    <div><div class="sp-price">$1,166.54</div><div class="sp-chg-p">▲ +3.10% วันนี้</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Bull — ATH Break Today</div></div>
+    <div class="badge">ATH วันนี้ $1,166</div>
+    <div class="badge">Score 7/8</div>
+    <div class="badge">Defensive</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy Pullback</div>
+        <div class="tc-cond ttb">รอ pullback $1,115–1,130 + H1 bullish</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$1,115–1,130</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$1,090</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$1,200</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hw">
+        <div class="tc-title ttw">⏳ รอ Confirm ATH Hold</div>
+        <div class="tc-cond ttw">ถ้าปิดเหนือ ATH $1,166 ได้</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$1,167+</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$1,130</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$1,220</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> GLP-1 Mounjaro demand · ATH ใหม่วันนี้ $1,166 · Defensive healthcare ไม่ได้รับผลจาก chip selloff · Institutional inflows ต่อเนื่อง</div>
+</div>
+</div>
+
+<!-- TSLA -->
+<div id="t-tsla" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">TSLA</div><div class="sp-name">Tesla · EV / Technology</div></div>
+    <div><div class="sp-price">$403.51</div><div class="sp-chg-p">▲ +3.20% วันนี้</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-wait"><div class="da"></div><div class="bl-a">Neutral — รอ</div></div>
+    <div class="badge">Bounce วันนี้</div>
+    <div class="badge">FSD Risk</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hw">
+        <div class="tc-title ttw">⏳ รอ Support Hold</div>
+        <div class="tc-cond ttw">รอ $398 hold + H1 BOS ขึ้น</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$398–408</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$388</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$440</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hs">
+        <div class="tc-title tts">▼ Sell ถ้า Fade</div>
+        <div class="tc-cond tts">ปิดต่ำกว่า $398 อีกครั้ง</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$396</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$410</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$370</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> FSD investigation ongoing · Bounce วันนี้ +3.20% จาก $391 · Neutral bias — ยังไม่มี clear direction</div>
+</div>
+</div>
+
+<!-- AAPL -->
+<div id="t-aapl" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">AAPL</div><div class="sp-name">Apple · Technology</div></div>
+    <div><div class="sp-price">$314.13</div><div class="sp-chg-p">▲ +2.21% วันนี้</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Steady Uptrend</div></div>
+    <div class="badge">WWDC Catalyst</div>
+    <div class="badge">Apple Intelligence</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy Pullback</div>
+        <div class="tc-cond ttb">Pullback $308–312 + EMA support</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$308–312</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$302</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$325</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy Breakout</div>
+        <div class="tc-cond ttb">Daily close เหนือ $316</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$317+</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$308</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$330</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> WWDC Apple Intelligence launch · Steady uptrend ไม่ผันผวนตาม chip selloff · +2.21% bounce วันนี้</div>
+</div>
+</div>
+
+<!-- AMD -->
+<div id="t-amd" class="pane">
+<div class="sp">
+  <div class="sp-top">
+    <div><div class="sp-sym">AMD</div><div class="sp-name">Advanced Micro Devices · AI GPU</div></div>
+    <div><div class="sp-price">$489.56</div><div class="sp-chg-p">▲ +4.97% วันนี้</div></div>
+  </div>
+  <div class="blue-line"></div>
+  <div class="bias-row">
+    <div class="bp-bull"><div class="dg"></div><div class="bl-g">Bounce Strong</div></div>
+    <div class="badge">Bounce จาก $466</div>
+    <div class="badge">ATH $546</div>
+    <div class="badge">MI300X</div>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div class="tc-hw">
+        <div class="tc-title ttw">⏳ รอ CPI ก่อน</div>
+        <div class="tc-cond ttw">Semi bounce อาจ fade ถ้า CPI สูง</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Watch</div><div class="trv va">$480–520</div></div>
+        <div><div class="trl">Support</div><div class="trv vt">$460</div></div>
+        <div><div class="trl">Resist.</div><div class="trv vs">$546</div></div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-hb">
+        <div class="tc-title ttb">▲ Buy ถ้า $500 Break</div>
+        <div class="tc-cond ttb">Daily close เหนือ $500 + volume</div>
+      </div>
+      <div class="tc-body">
+        <div><div class="trl">Entry</div><div class="trv ve">$502+</div></div>
+        <div><div class="trl">SL</div><div class="trv vs">$475</div></div>
+        <div><div class="trl">TP</div><div class="trv vt">$546</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-box"><strong>Context:</strong> AI GPU MI300X · ร่วง −12.6% ศุกร์ → Bounce +4.97% วันนี้ · รอ CPI อังคาร ก่อนตัดสินใจ direction จริง</div>
+</div>
+</div>
+
+<!-- OVERVIEW -->
+<div id="t-overview" class="pane">
+<div class="sec">Watchlist Snapshot วันนี้ — ข้อมูลจริงจาก TradingView</div>
+<div class="tw"><table style="min-width:580px">
+  <thead><tr>
+    <th style="width:28px">#</th>
+    <th style="width:65px">Symbol</th>
+    <th style="width:85px">ราคา</th>
+    <th style="width:85px">เปลี่ยน วันนี้</th>
+    <th style="width:75px">Sector</th>
+    <th style="width:90px">Bias</th>
+    <th style="width:60px">Entry?</th>
+  </tr></thead>
+  <tbody id="ov-tb"></tbody>
+</table></div>
+
+<div class="sec">Market Summary วันนี้</div>
+<div style="background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:11px;color:var(--text2);line-height:2">
+  <span style="color:var(--green2);font-weight:600">Bounce แรง:</span> MRVL +13.67%, ALAB +9.93%, MU +9.33%, KLAC +8%, ASML +6.67%, SNDK +6.11%<br>
+  <span style="color:var(--green2);font-weight:600">Steady green:</span> LLY +3.10% (ATH ใหม่), TSLA +3.20%, AMD +4.97%, TSM +3.76%<br>
+  <span style="color:var(--amber2);font-weight:600">Key risk:</span> CPI อังคาร 10 มิ.ย. — ถ้าสูงกว่าคาด bounce อาจ reverse ทุกตัว<br>
+  <span style="color:var(--blue2);font-weight:600">Best setup วันนี้:</span> WLDN (Non-tech, ใกล้ ATH $101) และ LLY (ATH ใหม่ $1,166)
+</div>
+</div>
+
+</div>
+
+<footer>
+  <div class="ft-brand">US STOCKS TRADE PLAN</div>
+  <div class="ft-text">
+    ข้อมูลราคาจาก TradingView Watchlist จริง · 8 มิ.ย. 2026 · SMC + ICT Analysis<br>
+    ไม่ใช่คำแนะนำการลงทุน ใช้ประกอบการตัดสินใจเท่านั้น
+  </div>
+</footer>
 
 <script>
-function sw(id,btn){
+function st(id,btn){
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
-  document.getElementById('p-'+id).classList.add('on');
+  document.getElementById('t-'+id).classList.add('on');
   btn.classList.add('on');
 }
 
-const SECTORS=[
-  {name:'Consumer Staples',chg:+1.8,color:'#1D9E75'},
-  {name:'Healthcare',chg:+0.9,color:'#1D9E75'},
-  {name:'Utilities',chg:+0.4,color:'#1D9E75'},
-  {name:'Financials',chg:-0.3,color:'#854F0B'},
-  {name:'Industrials',chg:-0.8,color:'#854F0B'},
-  {name:'Energy',chg:-1.1,color:'#854F0B'},
-  {name:'Materials',chg:-1.4,color:'#A32D2D'},
-  {name:'Communication',chg:-2.1,color:'#A32D2D'},
-  {name:'Consumer Disc.',chg:-2.8,color:'#A32D2D'},
-  {name:'Technology',chg:-3.5,color:'#A32D2D'},
-  {name:'Semiconductors',chg:-6.2,color:'#A32D2D'},
+const OV=[
+  {r:1,sym:'MRVL',name:'Marvell',p:299.48,chg:13.67,sec:'Semi',bias:'Bounce',entry:'Watch'},
+  {r:2,sym:'LLY', name:'Eli Lilly',p:1166.54,chg:3.10,sec:'Healthcare',bias:'Bull ATH',entry:'Ready'},
+  {r:3,sym:'ALAB',name:'Astera Labs',p:348.54,chg:9.93,sec:'AI Chip',bias:'Bounce',entry:'Watch'},
+  {r:4,sym:'KLAC',name:'KLA Corp',p:2083.56,chg:8.00,sec:'Semi Equip',bias:'Bounce',entry:'Watch'},
+  {r:5,sym:'MU',  name:'Micron',p:944.59,chg:9.33,sec:'Memory',bias:'Bounce',entry:'Watch'},
+  {r:6,sym:'WLDN',name:'Willdan',p:99.26,chg:2.11,sec:'Services',bias:'Bull ATH',entry:'Ready'},
+  {r:7,sym:'AMD', name:'AMD',p:489.56,chg:4.97,sec:'AI GPU',bias:'Bounce',entry:'Watch'},
+  {r:8,sym:'AAPL',name:'Apple',p:314.13,chg:2.21,sec:'Tech',bias:'Steady Bull',entry:'Watch'},
+  {r:9,sym:'TSLA',name:'Tesla',p:403.51,chg:3.20,sec:'EV',bias:'Neutral',entry:'Watch'},
+  {r:10,sym:'TSM',name:'TSMC',p:430.78,chg:3.76,sec:'Foundry',bias:'Bounce',entry:'Watch'},
 ];
-const sl=document.getElementById('sector-list');
-SECTORS.forEach(s=>{
-  const pct=Math.abs(s.chg);
-  const maxW=120;
-  const w=Math.round(pct/6.2*maxW);
-  sl.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:.5px solid var(--color-border-tertiary)">
-    <div style="width:130px;font-size:10.5px;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
-    <div style="flex:1;display:flex;align-items:center;gap:5px">
-      <div style="width:${w}px;height:6px;background:${s.color};border-radius:2px;min-width:2px"></div>
-      <span style="font-size:10px;font-family:var(--font-mono);color:${s.color}">${s.chg>0?'+':''}${s.chg.toFixed(1)}%</span>
-    </div>
-  </div>`;
-});
-
-const WL=[
-  {rank:1,sym:'WLDN',name:'Willdan',p:97.21,chg:24.55,sector:'Services',score:7,setup:'ATH Breakout',entry:'Ready'},
-  {rank:2,sym:'LLY',name:'Eli Lilly',p:1131.42,chg:25.71,sector:'Healthcare',score:7,setup:'Pullback Buy',entry:'Watch'},
-  {rank:3,sym:'CL',name:'Colgate',p:88.58,chg:1.04,sector:'Staples',score:6,setup:'Rotation Play',entry:'Watch'},
-  {rank:4,sym:'JNJ',name:'J&J',p:232.77,chg:2.02,sector:'Healthcare',score:6,setup:'Defensive',entry:'Watch'},
-  {rank:5,sym:'ISRG',name:'Intuitive Surg.',p:422.06,chg:0.77,sector:'Healthcare',score:5,setup:'Pullback',entry:'Watch'},
-  {rank:6,sym:'AAPL',name:'Apple',p:307.34,chg:5.98,sector:'Tech',score:5,setup:'Mild PB',entry:'Watch'},
-  {rank:7,sym:'V',name:'Visa',p:323.57,chg:5.36,sector:'Fintech',score:4,setup:'Sideways',entry:'Watch'},
-  {rank:8,sym:'AVGO',name:'Broadcom',p:385.73,chg:-9.24,sector:'Semi',score:2,setup:'Avoid',entry:'Skip'},
-  {rank:9,sym:'MU',name:'Micron',p:864.01,chg:74.23,sector:'Semi',score:2,setup:'Avoid',entry:'Skip'},
-  {rank:10,sym:'AMD',name:'AMD',p:466.38,chg:38.49,sector:'Semi',score:2,setup:'Avoid',entry:'Skip'},
-];
-function rB(r){if(r===1)return`<span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;font-size:9px;font-weight:500;background:#FAEEDA;color:#854F0B">1</span>`;if(r===2)return`<span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;font-size:9px;font-weight:500;background:#F1EFE8;color:#5F5E5A">2</span>`;if(r===3)return`<span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;font-size:9px;font-weight:500;background:#FAECE7;color:#993C1D">3</span>`;return`<span style="display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;font-size:9px;background:var(--color-background-secondary);color:var(--color-text-secondary)">${r}</span>`;}
-function sBar(s){const p=(s/8)*100;const c=s>=6?'#3B6D11':s>=4?'#854F0B':'#A32D2D';return`<span style="font-family:var(--font-mono);font-size:10px">${s}/8</span><span style="width:45px;height:4px;background:var(--color-border-tertiary);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:3px"><span style="display:block;height:100%;width:${p}%;background:${c};border-radius:2px"></span></span>`;}
-function eB(e){if(e==='Ready')return'<span class="bd bg">Ready</span>';if(e==='Watch')return'<span class="bd ba">Watch</span>';return'<span class="bd br">Skip</span>';}
-document.getElementById('wl-tb').innerHTML=WL.map(d=>{
-  const cc=d.chg>0?'gn':d.chg<0?'rn':'';
+function rBadge(r){const m={1:'r1',2:'r2',3:'r3'};const cl=m[r]||'rn-b';return`<span class="rb ${cl}">${r}</span>`;}
+const tb=document.getElementById('ov-tb');
+if(tb){tb.innerHTML=OV.map(d=>{
+  const cc=d.chg>0?'gn':'rn';
   const cs=(d.chg>0?'+':'')+d.chg.toFixed(2)+'%';
-  return`<tr><td>${rB(d.rank)}</td><td style="font-weight:500;font-size:11px">${d.sym}<br><span style="font-size:9px;color:var(--color-text-secondary)">${d.name}</span></td><td style="font-family:var(--font-mono);font-size:10.5px">$${d.p.toLocaleString('en-US',{maximumFractionDigits:2})}</td><td><span class="${cc}" style="font-family:var(--font-mono);font-size:10px">${cs}</span></td><td style="font-size:9.5px;color:var(--color-text-secondary)">${d.sector}</td><td>${sBar(d.score)}</td><td><span class="bd ${d.score>=6?'bg':d.score>=4?'ba':'br'}">${d.setup}</span></td><td>${eB(d.entry)}</td><td><button class="abtn" onclick='sendPrompt("วิเคราะห์ ${d.sym} Swing Trade setup entry SL TP สัปดาห์ 9-13 มิถุนายน 2026")'>↗</button></td></tr>`;
-}).join('');
+  const biasC=d.bias.includes('Bull')||d.bias==='Bounce'?'bg':d.bias==='Neutral'?'ba':'br';
+  const entC=d.entry==='Ready'?'bg':d.entry==='Watch'?'ba':'br';
+  return`<tr>
+    <td>${rBadge(d.r)}</td>
+    <td style="font-weight:600;font-size:11px">${d.sym}<br><span style="font-size:9px;color:var(--text3)">${d.name}</span></td>
+    <td style="font-family:var(--mono);font-size:11px">$${d.p.toLocaleString('en-US',{maximumFractionDigits:2})}</td>
+    <td><span class="${cc}" style="font-family:var(--mono);font-size:11px">${cs}</span></td>
+    <td style="color:var(--text2)">${d.sec}</td>
+    <td><span class="bd ${biasC}">${d.bias}</span></td>
+    <td><span class="bd ${entC}">${d.entry}</span></td>
+  </tr>`;
+}).join('');}
 </script>
+</body>
+</html>
